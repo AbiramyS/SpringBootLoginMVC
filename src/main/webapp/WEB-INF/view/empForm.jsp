@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,19 +9,21 @@
 </head>
 <body>
 
-<form action="save" method="post" modelAttribute="e">
+<form:form action="save" method="post" modelAttribute="e">
 
-EmployeeId: <input type="text" name="empId"><br>
-FirstName: <input type="text" name="fname"><br>
-MiddleName: <input type="text" name="mname"><br>
-LastName: <input type="text" name="lname"><br>
-Age: <input type="text" name="age"><br>
-University Name: <input type="text" name="uname"><br>
+EmployeeId: <form:input path="empId" type="text" /><br>
+FirstName: <form:input path="fname" type="text" /><br>
+MiddleName: <form:input path="mname" type="text" /><br>
+LastName: <form:input type="text" name="lname" /><br>
+Age: <form:input type="text" name="age" /><br>
+University Name: <form:input type="text" name="uname" /><br>
+Email: <form:input type="email" name="email" /><br>
+Password: <form:input type="password" name="password" /><br>
 <input type="submit" value="submit">
 
 
 
-</form>
+</form:form>
 
 </body>
 </html>

@@ -31,7 +31,7 @@ public class EmployeeImpl implements EmployeeDAO {
 	@Override
 	public int saveEmployee(Employee e) {
 		String query = "insert into employee values('" + e.getEmpId() + "','" + e.getFname() + "','" + e.getMname()
-				+ "','" + e.getLname() + "','" + e.getAge() + "')";
+				+ "','" + e.getLname() + "','" + e.getAge() + "','" + e.getEmail() + "','" + e.getPassword() + "')";
 		System.out.println(query);
 		return jdbcTemplate.update(query);
 	}
@@ -45,7 +45,7 @@ public class EmployeeImpl implements EmployeeDAO {
 	@Override
 	public int updateEmployee(Employee e) {
 		String query = "update employee set fname= '" + e.getFname() + "', mname= '" + e.getMname() + "', lname= '"
-				+ e.getLname() + "', age= '" + e.getAge() +"' where empId=  '"+ e.getEmpId()+"' ";
+				+ e.getLname() + "', age= '" + e.getAge() +"','" + e.getEmail() + "','" + e.getPassword() + "' where empId=  '"+ e.getEmpId()+"' ";
 		return jdbcTemplate.update(query);
 	}
 	
@@ -65,6 +65,8 @@ public class EmployeeImpl implements EmployeeDAO {
 		e.setMname(rs.getString("mname"));
 		e.setLname(rs.getString("lname"));
 		e.setAge(rs.getInt("age"));
+		e.setEmail(rs.getString("email"));
+		e.setPassword(rs.getString("password"));
 		return e;	
 }
 }

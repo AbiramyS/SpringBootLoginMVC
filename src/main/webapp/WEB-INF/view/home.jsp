@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login Page</title>
+<title>Home Page</title>
 </head>
 <body>
 
-<a href="empForm">Add Employee</a>  
-<a href="login">View Employees</a>
+<a href="empForm">Register</a>  
+<a href="login">Login</a>
 
 </body>
 </html>
