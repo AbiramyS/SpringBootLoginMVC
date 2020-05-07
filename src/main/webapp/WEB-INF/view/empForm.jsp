@@ -1,26 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Registration Form</title>
 </head>
 <body>
-
-<form action="save" method="post" modelAttribute="e">
-
-EmployeeId: <input type="text" name="empId"><br>
-FirstName: <input type="text" name="fname"><br>
-MiddleName: <input type="text" name="mname"><br>
-LastName: <input type="text" name="lname"><br>
-Age: <input type="text" name="age"><br>
-University Name: <input type="text" name="uname"><br>
+<h1>Registration Form</h1>
+<form:form action="save" method="post" modelAttribute="e">
+EmployeeId: <form:input path= "empId"/><br>
+FirstName: <form:input path="fname"/><br>
+MiddleName: <form:input path="mname"/>><br>
+LastName: <form:input path="lname"/><br>
+Age: <form:input path="age"/><br>
+University Name:<form:input path="uname"/><br>
+Email: <form:input path="email"/><br>
+Password: <form:input path="password"/><br>
 <input type="submit" value="submit">
-
-
-
-</form>
+</form:form>
 
 </body>
 </html>

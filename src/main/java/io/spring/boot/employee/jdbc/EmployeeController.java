@@ -23,6 +23,13 @@ public class EmployeeController {
 	@Autowired
 	EmployeeImpl employeeImpl;
 	
+	@GetMapping("/home")
+	public ModelAndView showHome() {
+		ModelAndView mv=new ModelAndView("home");
+		mv.addObject("e", new Employee());
+		return mv;
+	}
+	
 	@GetMapping("/empForm")
 	public ModelAndView viewEmployeeForm() {
 		ModelAndView mv=new ModelAndView("empForm");
