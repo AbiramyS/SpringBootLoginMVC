@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Login Page</title>
 </head>
 <body>
 
-This is Home Page
+<a href="empForm">Add Employee</a>  
+<a href="login">View Employees</a>
 
 </body>
 </html>
