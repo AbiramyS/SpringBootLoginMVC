@@ -23,10 +23,36 @@ public class EmployeeController {
 	@Autowired
 	EmployeeImpl employeeImpl;
 	
+	@GetMapping("/home")
+	public ModelAndView viewHome() {
+		ModelAndView mv=new ModelAndView("home");
+		return mv;
+	}
+	
 	@GetMapping("/empForm")
 	public ModelAndView viewEmployeeForm() {
 		ModelAndView mv=new ModelAndView("empForm");
 		mv.addObject("e", new Employee());
+		return mv;
+	}
+	
+	@PostMapping("/empForm")
+	public ModelAndView handleRegistration(@ModelAttribute("e") Employee e) {
+		int status=employeeImpl.saveEmployee(e);
+		ModelAndView mv=new ModelAndView();
+		if(status>0) {
+			System.out.println("successfully inserted");
+			mv.setViewName("redirect:login");
+		}else {
+			mv.setViewName("empForm");
+		}
+		return mv;
+	}
+	
+	@GetMapping("/login")
+	public ModelAndView employeeLogin() {
+		ModelAndView mv=new ModelAndView("login");
+		mv.addObject("loginModel", new LoginModel());
 		return mv;
 	}
 	

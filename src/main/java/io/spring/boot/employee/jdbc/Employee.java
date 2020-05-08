@@ -41,10 +41,10 @@ public class Employee {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public static String getUname() {
+	public  String getUname() {
 		return uname;
 	}
-	public static void setUname(String uname) {
+	public void setUname(String uname) {
 		Employee.uname = uname;
 	}
 	
