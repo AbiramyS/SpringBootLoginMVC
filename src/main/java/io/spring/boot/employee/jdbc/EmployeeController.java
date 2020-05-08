@@ -32,7 +32,8 @@ public class EmployeeController {
 	@GetMapping("/empForm")
 	public ModelAndView viewEmployeeForm() {
 		ModelAndView mv=new ModelAndView("empForm");
-		mv.addObject("e", new Employee());
+		Employee e=new Employee();
+		mv.addObject("e", e);
 		return mv;
 	}
 	
@@ -48,6 +49,29 @@ public class EmployeeController {
 		}
 		return mv;
 	}
+	
+	//With out using the form tags for creating the jsp form in the spring
+	//how to create the handleRegistration
+	
+	/*
+	 * 	@PostMapping("/empForm")
+		public ModelAndView handleRegistration(@RequestParam("empId") int empId, @RequestParam("fname") String fname,@RequestParam("mname") String lname,
+		@RequestParam("age") int age, @RequestParam("uname") String uname, @RequestParam("email") String email,@RequestParam("password") String password,) {
+		Employee e=new Employee(empId, fname, mname, lname, age, uname, email, password);
+		int status=employeeImpl.saveEmployee(e);
+		ModelAndView mv=new ModelAndView();//mv.addObject("e", e);
+		if(status>0) {
+			System.out.println("successfully inserted");
+			mv.setViewName("redirect:login");
+		}else {
+			mv.setViewName("empForm");
+		}
+		return mv;
+	}
+	 * 
+	 * 
+	 */
+	
 	
 	@GetMapping("/login")
 	public ModelAndView employeeLogin() {

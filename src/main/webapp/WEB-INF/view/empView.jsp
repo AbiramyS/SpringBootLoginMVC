@@ -27,7 +27,7 @@
 </tr>
 <c:forEach var="e" items="${list}"> 
 <tr>
-<td><c:out value="${e.empId}"></c:out></td>
+<td><c:out value="${e.empId}"></c:out></td><!-- using expression language to get the values -->
 <td><c:out value="${e.fname}"></c:out></td>
 <td><c:out value="${e.mname}"></c:out></td>
 <td><c:out value="${e.lname}"></c:out></td>
