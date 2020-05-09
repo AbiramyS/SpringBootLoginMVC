@@ -7,8 +7,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import io.spring.boot.employee.jdbc.custom.editor.binder.EmployeeCustomEditor;
 import io.spring.boot.employee.jdbc.impl.EmployeeImpl;
 import io.spring.boot.employee.jdbc.model.Employee;
 import io.spring.boot.employee.jdbc.model.LoginModel;
@@ -30,6 +33,7 @@ public class EmployeeController {
 	@Autowired
 	EmployeeImpl employeeImpl;
 	
+
 	@GetMapping("/home")
 	public ModelAndView viewHome() {
 		ModelAndView mv=new ModelAndView("home");
@@ -43,6 +47,12 @@ public class EmployeeController {
 		mv.addObject("e", e);
 		return mv;
 	}
+	
+	//While using spring form tag we need to use the @ModelAttribute
+	//If we are binding data with the normal form we need to use the @RequestParam
+	
+	//Before updating or saving the data in the database we have to validate the data ---so we are using BindingResult
+	//BindingResult helps to show the errors in the jsp page
 	
 	@PostMapping("/empForm")
 	public ModelAndView handleRegistration(@Valid @ModelAttribute("e") Employee e, BindingResult result) {
@@ -188,6 +198,28 @@ public class EmployeeController {
 		return employeeImpl.getAnEmployee(empId, fname, lname);
 		
 	}
+	//This kind of exceptionhandling come with some draw backs thats why we have to go with the global exception 
+	//If we mention here only this class will be accessible---if we need to access all the other classes we have to go with global
+	//@ExceptionHandler(value=RuntimeException.class)//RunTimeException--ArrayIndexOutOfBoundException, 
+	//public ModelAndView exceptionHandler() {
+	//	ModelAndView mv=new ModelAndView("error");
+	//	return mv;
+	//}
+	
+	//If there is a an attribute dateofbirth  it is in the form user need to enter it
+	//To get the format--what ever we like we need to mention the SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+	//@InitBinder
+	//We can get all the information from spring website---Built-in-properties editor
+	//we can also write the custom property editors
+	
+	@InitBinder
+	public 	void initBinder(WebDataBinder binder) {
+		//SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(String.class, "fname", new EmployeeCustomEditor());
+		//if we need we can disallowed the field
+		//binder.setDisallowedFields("mane" ,"fname");
+	}
+	
 	
 }
 

@@ -1,4 +1,4 @@
-package io.spring.boot.employee.jdbc.validation;
+package io.spring.boot.employee.jdbc.exception;
 
 import java.util.Date;
 

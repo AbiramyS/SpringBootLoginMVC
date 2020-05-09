@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Employee {
 	
-	//JSR303 and JSR 309 annotation is used in validation
+	//If we need to show the user readable validations we can use JSR303 and JSR 309 annotation is used in validation
 	
 	int empId;
 	@NotEmpty(message = "{e.fname.empty}")

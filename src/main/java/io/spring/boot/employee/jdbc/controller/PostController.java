@@ -81,7 +81,7 @@ public class PostController {
 		if(status>0) {
 		System.out.println("successfully inserted");
 		mv.addObject("post", post);
-		mv.setViewName("viewPost");
+		mv.setViewName("redirect:viewPost");
 	}else {
 		mv.setViewName("post");
 	}
@@ -92,7 +92,6 @@ public class PostController {
 		ModelAndView mv=new ModelAndView("successPost");
 		return mv;
 	}
-	
 	@GetMapping("/viewPost")
 	public ModelAndView getAllPost(){
 		List<Post> list= postDaoImpl.getAllPost();
