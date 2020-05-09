@@ -1,6 +1,8 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.dao;
 
 import java.util.List;
+
+import io.spring.boot.employee.jdbc.model.Employee;
 
 public interface EmployeeDAO {
 	

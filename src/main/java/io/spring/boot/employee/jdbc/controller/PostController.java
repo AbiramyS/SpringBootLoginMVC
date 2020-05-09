@@ -1,6 +1,7 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import io.spring.boot.employee.jdbc.impl.PostDAOImpl;
+import io.spring.boot.employee.jdbc.model.Post;
 
 @Controller
 @RequestMapping("/posts")
@@ -43,6 +47,8 @@ public class PostController {
 		return mv;	
 	}
 	
+
+	
 	/*Instead of multiple @RequestParam annotation we can use @RequestParam Map<String, String> requestMap
 	 * 	@PostMapping("/addPost")
 		public ModelAndView addPost(@RequestParam Map<String, String> requestMap)
@@ -65,7 +71,6 @@ public class PostController {
 	}
 	 * 
 	 */
-	
 	@PostMapping("/addAPost")
 	public ModelAndView addAPost(@RequestParam Map<String, String> requestMap) {
 		Post post=new Post(requestMap.get("postId"), new Date(),requestMap.get("postTitle"), requestMap.get("postBody"));
@@ -76,18 +81,26 @@ public class PostController {
 		if(status>0) {
 		System.out.println("successfully inserted");
 		mv.addObject("post", post);
-		mv.setViewName("successPost");
+		mv.setViewName("viewPost");
 	}else {
 		mv.setViewName("post");
 	}
 	return mv;	
-}
-	
-	
+}	
 	@GetMapping("/successPost")
 	public ModelAndView successPost() {
 		ModelAndView mv=new ModelAndView("successPost");
 		return mv;
 	}
+	
+	@GetMapping("/viewPost")
+	public ModelAndView getAllPost(){
+		List<Post> list= postDaoImpl.getAllPost();
+		ModelAndView mv=new ModelAndView("viewPost");
+		mv.addObject("postList", list);
+		return mv;
+	}
+	
+
 
 }

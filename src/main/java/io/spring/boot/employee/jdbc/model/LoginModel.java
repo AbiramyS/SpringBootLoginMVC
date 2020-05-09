@@ -1,8 +1,16 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.model;
+
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+
+
 
 public class LoginModel {
-	
+	@NotNull
+	@Email
 	private String email;
+	@NotNull
 	private String password;
 	public String getEmail() {
 		return email;

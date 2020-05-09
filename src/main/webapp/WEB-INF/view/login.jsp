@@ -8,8 +8,8 @@
 <title>Log In</title>
 </head>
 <body>
-<form:form action="empView" method="post" modelAttribute="loginModel">
-Email: <form:input type="email" path="email" value="${email}"/><br>
+<form:form action="/employees/login" method="post" modelAttribute="loginModel">
+Email: <form:input type="email" path="email" /><br>
 Password: <form:input type="password" path="password" /><br>
 <input type="submit" value="submit">
 </form:form>

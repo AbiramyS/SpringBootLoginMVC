@@ -1,4 +1,4 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.model;
 
 import java.util.Date;
 

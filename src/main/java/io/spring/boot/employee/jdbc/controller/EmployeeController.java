@@ -1,9 +1,12 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import io.spring.boot.employee.jdbc.impl.EmployeeImpl;
+import io.spring.boot.employee.jdbc.model.Employee;
+import io.spring.boot.employee.jdbc.model.LoginModel;
 
 @RestController
 @RequestMapping("/employees")
@@ -38,14 +45,21 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/empForm")
-	public ModelAndView handleRegistration(@ModelAttribute("e") Employee e) {
-		int status=employeeImpl.saveEmployee(e);
+	public ModelAndView handleRegistration(@Valid @ModelAttribute("e") Employee e, BindingResult result) {
 		ModelAndView mv=new ModelAndView();
-		if(status>0) {
-			System.out.println("successfully inserted");
-			mv.setViewName("redirect:login");
-		}else {
+		System.out.println(result);
+		if(result.hasErrors()) {
 			mv.setViewName("empForm");
+		}
+		else {
+			int status=employeeImpl.saveEmployee(e);
+			if(status>0) {
+				System.out.println("successfully inserted");
+				mv.setViewName("redirect:login");
+				
+			}else {
+				mv.setViewName("empForm");
+			}
 		}
 		return mv;
 	}
@@ -72,11 +86,23 @@ public class EmployeeController {
 	 * 
 	 */
 	
-	
 	@GetMapping("/login")
 	public ModelAndView employeeLogin() {
 		ModelAndView mv=new ModelAndView("login");
 		mv.addObject("loginModel", new LoginModel());
+		return mv;
+	}
+	
+
+	@PostMapping("/login")
+	public ModelAndView employeeLoginSuccess(@Valid @ModelAttribute("loginModel") LoginModel loginModel, BindingResult result) {
+		ModelAndView mv=new ModelAndView();
+		if(result.hasErrors()) {
+			mv.setViewName("redirect:home");
+		}else {
+			System.out.println("redicting");
+			mv.setViewName("redirect:empView");
+		}
 		return mv;
 	}
 	
@@ -93,10 +119,12 @@ public class EmployeeController {
 	@GetMapping("/empView")
 	public ModelAndView getAllEmployee() {
 		ModelAndView mv=new ModelAndView("empView");
+		System.out.println("inside empView GetMapping "+mv.getViewName());
 		List<Employee> list=employeeImpl.getAllEmployee();
 		mv.addObject("list", list);
 		return mv;
 	}
+
 	
 	@GetMapping("/empView/{empId}")
 	public ModelAndView edit(@PathVariable int empId, Model m) {

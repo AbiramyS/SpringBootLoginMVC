@@ -1,14 +1,31 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.model;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class Employee {
 	
+	//JSR303 and JSR 309 annotation is used in validation
+	
 	int empId;
+	@NotEmpty(message = "{e.fname.empty}")
+	//@Size--length of the String or characters
+	@Size( max=30,min=1, message="{e.fname.invalid}")
 	String fname;
 	String mname;
 	String lname;
+	@Min(value=12, message="{e.age.minvalue}")
+	@Max(value=100, message="{e.age.maxvalue}")
 	int age;
 	static String uname="SNHU";
+	@Email(message="{e.email.invalid}")
 	String email;
+	@NotNull(message="{e.password.empty}")
 	String password;
 
 	public int getEmpId() {
