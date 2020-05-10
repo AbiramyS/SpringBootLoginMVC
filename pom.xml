@@ -9,6 +9,7 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	
 	<groupId>io.spring.boot.employee.jdbc</groupId>
 	<artifactId>spring-boot-employee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>

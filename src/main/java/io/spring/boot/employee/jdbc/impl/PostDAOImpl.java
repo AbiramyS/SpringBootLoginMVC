@@ -2,7 +2,6 @@ package io.spring.boot.employee.jdbc.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,18 +39,21 @@ public class PostDAOImpl implements PostDAO{
 
 	@Override
 	public Post getPostById(String postId) {
-		return null;
+		String sql = "select * from post where postId=?";
+		return jdbcTemaplate.queryForObject(sql, new PostRowMapper(), postId);
 	}
 
 
 	@Override
 	public int deletePost(String postId) {
-		return 0;
+		String sql="delete from post where postId=?";
+		return jdbcTemaplate.update(sql);
 	}
 
 	@Override
 	public int updatePost(Post p) {
-		return 0;
+		String sql= "update post set  postTitle=?, postBody=? where postId =?";	
+		return jdbcTemaplate.update(sql);
 	}
 }
 

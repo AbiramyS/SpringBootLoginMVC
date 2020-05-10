@@ -3,15 +3,11 @@ package io.spring.boot.employee.jdbc.model;
 import java.util.Date;
 
 public class Comment {
-	
 	private String commentId;
 	private Date commentDate;
 	private String comment;
-
-	
 	public Comment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Comment(String commentId, Date commentDate, String comment) {
@@ -51,12 +47,4 @@ public class Comment {
 		return "Comment [commentId=" + commentId + ", commentDate=" + commentDate + ", comment=" + comment
 				+ "]";
 	}
-
-	
-	
-	
-	
-	
-	
-
 }

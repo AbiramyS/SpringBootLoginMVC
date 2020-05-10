@@ -100,6 +100,39 @@ public class PostController {
 		return mv;
 	}
 	
+	@GetMapping("/editPost")
+	public ModelAndView editPost(@RequestParam("id") String id) {
+		ModelAndView mv=new ModelAndView("editPost");
+		Post p = postDaoImpl.getPostById(id);
+		mv.addObject("post", p);
+		return mv;
+	}
+	
+	@PostMapping("/editPost")
+	public ModelAndView editPostSave() {
+		ModelAndView mv=new ModelAndView();
+		Post p=new Post();
+		int update = postDaoImpl.updatePost(p);
+		if(update == 1) {
+			mv.setViewName("viewPost");
+		}else {
+				mv.setViewName("redirect:editPost");
+		}
+		return mv;
+	}
+	
+	
+	@GetMapping("/deletePost")
+	public ModelAndView deletePost(@RequestParam("id") String id) {
+		ModelAndView mv=new ModelAndView();
+		int deleted = postDaoImpl.deletePost(id);
+		if(deleted == 1) {
+			System.out.println("Successfully deleted");;
+		}else {
+				mv.setViewName("redirect:viewPost");
+		}
+		return mv;
+	}
+	
+	}
 
-
-}

@@ -9,6 +9,9 @@
 </head>
 <body>
 
+<a href="post">Add New Post</a> 
+<a href="logout">Logout</a> 
+
 <table border="2" width="50%">
 <tr>
 	<th>Post Id</th>
@@ -25,13 +28,13 @@
 <td><c:out value="${post.postCreated}"></c:out></td>
 <td><c:out value="${post.postTitle}"></c:out></td>
 <td><c:out value="${post.postBody}"></c:out></td>
-<td><a href="editPost/${post.postId}">Edit</a></td>  
-<td><a href="deletePost/${post.postId}">Delete</a></td>  
+<td><a href="editPost?id=${post.postId}">Edit</a></td>  
+<td><a href="deletePost?id=${post.postId}">Delete</a></td>  
 </tr>
 </c:forEach>
 </table>
 <br> 
-   <a href="post">Add New Post</a> 
+
 </table>
 
 </body>

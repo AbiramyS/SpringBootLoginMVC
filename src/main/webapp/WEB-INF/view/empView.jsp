@@ -10,6 +10,9 @@
 </head>
 <body>
 
+<a href="logout">Logout</a> 
+<a href="home">Home</a> 
+> 
 <h1>Employee List</h1>
 
 <table border="2" width="70%" cellpadding="2">
@@ -33,12 +36,12 @@
 <td><c:out value="${e.lname}"></c:out></td>
 <td><c:out value="${e.age}"></c:out></td>
 <td><c:out value="${e.uname}"></c:out></td>
-<td><a href="editemp/${e.empId}">Edit</a></td>  
-<td><a href="deleteemp/${e.empId}">Delete</a></td>  
+<td><a href="editemp?id=${e.empId}">Edit</a></td>  
+<td><a href="deleteemp?id=${e.empId}">Delete</a></td>  
 </tr>
 </c:forEach>
 </table>
 <br> 
-   <a href="empform">Add New Employee</a>  
+
 </body>
 </html>
