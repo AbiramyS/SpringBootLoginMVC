@@ -2,6 +2,8 @@ package io.spring.boot.employee.jdbc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeImpl employeeImpl;
+	
+	@Autowired
+	HttpServletRequest request;
 	
 
 	@GetMapping("/home")
@@ -107,11 +112,32 @@ public class EmployeeController {
 	@PostMapping("/login")
 	public ModelAndView employeeLoginSuccess(@Valid @ModelAttribute("loginModel") LoginModel loginModel, BindingResult result) {
 		ModelAndView mv=new ModelAndView();
+		
 		if(result.hasErrors()) {
-			mv.setViewName("redirect:home");
+				mv.setViewName("redirect:home");
 		}else {
-			System.out.println("redicting");
-			mv.setViewName("redirect:empView");
+			Employee emp=employeeImpl.findByEmailAndPassword(loginModel.getEmail(), loginModel.getPassword());
+			if(emp != null) {
+				HttpSession session=request.getSession();
+				session.setAttribute("SESSION", emp);
+				session.setMaxInactiveInterval(1800);
+				System.out.println("redicting");
+				mv.setViewName("redirect:empView");
+			}
+		}
+		return mv;
+	}
+	
+	@GetMapping("/logout")
+	public ModelAndView logoutSuceess() {
+		HttpSession session=request.getSession(false);
+		ModelAndView mv=new ModelAndView();
+		if(session !=null) {
+		session.invalidate();
+		session.setMaxInactiveInterval(0);
+		mv.setViewName("logout");
+		}else {
+			mv.setViewName("redirect:login");
 		}
 		return mv;
 	}
@@ -128,10 +154,21 @@ public class EmployeeController {
 	
 	@GetMapping("/empView")
 	public ModelAndView getAllEmployee() {
-		ModelAndView mv=new ModelAndView("empView");
-		System.out.println("inside empView GetMapping "+mv.getViewName());
-		List<Employee> list=employeeImpl.getAllEmployee();
-		mv.addObject("list", list);
+		ModelAndView mv=new ModelAndView();
+		HttpSession session=request.getSession(false);
+		if(session != null) {
+			Employee emp=(Employee) session.getAttribute("SESSION");
+			if(emp != null) {
+			mv.setViewName("empView");
+			System.out.println("inside empView GetMapping "+mv.getViewName());
+			List<Employee> list=employeeImpl.getAllEmployee();
+			mv.addObject("list", list);
+			}else {
+				mv.setViewName("redirect:login");
+			}
+		}else {
+				mv.setViewName("redirect:login");
+		}				
 		return mv;
 	}
 

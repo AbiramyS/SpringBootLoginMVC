@@ -8,6 +8,8 @@
 <title>Log In</title>
 </head>
 <body>
+<a href="login">Login</a>
+<a href="empForm">Register</a>
 <form:form action="/employees/login" method="post" modelAttribute="loginModel">
 Email: <form:input type="email" path="email" /><br>
 Password: <form:input type="password" path="password" /><br>

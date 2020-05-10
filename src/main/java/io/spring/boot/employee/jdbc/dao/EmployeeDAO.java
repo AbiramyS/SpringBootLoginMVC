@@ -12,6 +12,7 @@ public interface EmployeeDAO {
 	public int deleteEmployee(int id);
 	public int updateEmployee(Employee e);
 	public Employee getAnEmployee(int empId, String fname, String lname);
+	public Employee findByEmailAndPassword(String email, String password);
 
 
 }

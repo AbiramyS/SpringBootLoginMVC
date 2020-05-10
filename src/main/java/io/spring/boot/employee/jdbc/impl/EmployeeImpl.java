@@ -56,6 +56,11 @@ public class EmployeeImpl implements EmployeeDAO {
 	public Employee getAnEmployee(int empId, String fname, String lname) {
 		String sql= "select * from employee where empId=? and fname=? and lname=?";
 		return jdbcTemplate.queryForObject(sql,new EmployeeRowMapper(), empId, fname,lname);
+	}
+	@Override
+	public Employee findByEmailAndPassword(String email, String password) {
+		String sql= "select * from employee where email=? and password=?";
+		return jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), email, password);
 	}	
 
 }
