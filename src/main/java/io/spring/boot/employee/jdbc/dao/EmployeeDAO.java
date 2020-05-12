@@ -1,6 +1,8 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.dao;
 
 import java.util.List;
+
+import io.spring.boot.employee.jdbc.model.Employee;
 
 public interface EmployeeDAO {
 	
@@ -10,6 +12,7 @@ public interface EmployeeDAO {
 	public int deleteEmployee(int id);
 	public int updateEmployee(Employee e);
 	public Employee getAnEmployee(int empId, String fname, String lname);
+	public Employee findByEmailAndPassword(String email, String password);
 
 
 }

@@ -1,4 +1,4 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+
+import io.spring.boot.employee.jdbc.dao.EmployeeDAO;
+import io.spring.boot.employee.jdbc.model.Employee;
 
 @Service
 public class EmployeeImpl implements EmployeeDAO {
@@ -31,7 +34,11 @@ public class EmployeeImpl implements EmployeeDAO {
 	@Override
 	public int saveEmployee(Employee e) {
 		String query = "insert into employee values('" + e.getEmpId() + "','" + e.getFname() + "','" + e.getMname()
+<<<<<<< HEAD:src/main/java/io/spring/boot/employee/jdbc/EmployeeImpl.java
 				+ "','" + e.getLname() + "','" + e.getAge() + "', '" + e.getEmail() + "', '" + e.getPassword() + "')";
+=======
+				+ "','" + e.getLname() + "','" + e.getAge() + "','" + e.getUname() + "','" + e.getEmail() + "','" + e.getPassword() + "')";
+>>>>>>> login-work:src/main/java/io/spring/boot/employee/jdbc/impl/EmployeeImpl.java
 		System.out.println(query);
 		return jdbcTemplate.update(query);
 	}
@@ -45,7 +52,11 @@ public class EmployeeImpl implements EmployeeDAO {
 	@Override
 	public int updateEmployee(Employee e) {
 		String query = "update employee set fname= '" + e.getFname() + "', mname= '" + e.getMname() + "', lname= '"
+<<<<<<< HEAD:src/main/java/io/spring/boot/employee/jdbc/EmployeeImpl.java
 				+ e.getLname() + "', age= '" + e.getAge() +"',email= '" + e.getEmail() + "', password= '" + e.getPassword() + "'  where empId=  '"+ e.getEmpId()+"' ";
+=======
+				+ e.getLname() + "', age= '" + e.getAge() +"','" + e.getUname() + "','" + e.getEmail() + "','" + e.getPassword() + "' where empId=  '"+ e.getEmpId()+"' ";
+>>>>>>> login-work:src/main/java/io/spring/boot/employee/jdbc/impl/EmployeeImpl.java
 		return jdbcTemplate.update(query);
 	}
 	
@@ -53,6 +64,11 @@ public class EmployeeImpl implements EmployeeDAO {
 	public Employee getAnEmployee(int empId, String fname, String lname) {
 		String sql= "select * from employee where empId=? and fname=? and lname=?";
 		return jdbcTemplate.queryForObject(sql,new EmployeeRowMapper(), empId, fname,lname);
+	}
+	@Override
+	public Employee findByEmailAndPassword(String email, String password) {
+		String sql= "select * from employee where email=? and password=?";
+		return jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), email, password);
 	}	
 
 }

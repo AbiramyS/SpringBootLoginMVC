@@ -1,4 +1,4 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

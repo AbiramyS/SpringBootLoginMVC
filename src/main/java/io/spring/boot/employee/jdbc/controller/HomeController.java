@@ -1,4 +1,4 @@
-package io.spring.boot.employee.jdbc;
+package io.spring.boot.employee.jdbc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

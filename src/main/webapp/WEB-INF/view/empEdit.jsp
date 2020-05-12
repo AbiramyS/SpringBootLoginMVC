@@ -12,35 +12,35 @@
     
   
         <h1>Edit Employee</h1>  
-       <form:form method="POST" action="/editsave">    
+       <form:form method="POST" action="/editSave">    
         <table >    
         <tr>  
         <td></td>    
-         <td><form:hidden  path="id" /></td>  
+         <td><form:input type="text" path="empId" disabled="disabled"/></td>  
          </tr>   
          <tr>    
           <td>FirstName : </td>   
-          <td><form:input path="fname"  /></td>  
+          <td><form:input type="text" path="fname"  /></td>  
          </tr>    
          <tr>    
           <td>MiddleName :</td>    
-          <td><form:input path="mname" /></td>  
+          <td><form:input type="text" path="mname" /></td>  
          </tr>   
          <tr>    
           <td>LastName :</td>    
-          <td><form:input path="lname" /></td>  
+          <td><form:input type="text" path="lname" /></td>  
          </tr>  
           <tr>    
           <td>Age :</td>    
-          <td><form:input path="age" /></td>  
+          <td><form:input type="text" path="age" /></td>  
          </tr>  
           <tr>    
           <td>University Name :</td>    
-          <td><form:input path="uname" /></td>  
+          <td><form:input type="text" path="uname" /></td>  
          </tr>     
          <tr>    
           <td> </td>    
-          <td><input type="submit" value="Edit Save" /></td>    
+          <td><input type="submit" value="EditSave" /></td>    
          </tr>    
         </table>    
        </form:form> 
