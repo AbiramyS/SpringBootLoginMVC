@@ -34,11 +34,7 @@ public class EmployeeImpl implements EmployeeDAO {
 	@Override
 	public int saveEmployee(Employee e) {
 		String query = "insert into employee values('" + e.getEmpId() + "','" + e.getFname() + "','" + e.getMname()
-<<<<<<< HEAD:src/main/java/io/spring/boot/employee/jdbc/EmployeeImpl.java
-				+ "','" + e.getLname() + "','" + e.getAge() + "', '" + e.getEmail() + "', '" + e.getPassword() + "')";
-=======
 				+ "','" + e.getLname() + "','" + e.getAge() + "','" + e.getUname() + "','" + e.getEmail() + "','" + e.getPassword() + "')";
->>>>>>> login-work:src/main/java/io/spring/boot/employee/jdbc/impl/EmployeeImpl.java
 		System.out.println(query);
 		return jdbcTemplate.update(query);
 	}
@@ -52,11 +48,7 @@ public class EmployeeImpl implements EmployeeDAO {
 	@Override
 	public int updateEmployee(Employee e) {
 		String query = "update employee set fname= '" + e.getFname() + "', mname= '" + e.getMname() + "', lname= '"
-<<<<<<< HEAD:src/main/java/io/spring/boot/employee/jdbc/EmployeeImpl.java
-				+ e.getLname() + "', age= '" + e.getAge() +"',email= '" + e.getEmail() + "', password= '" + e.getPassword() + "'  where empId=  '"+ e.getEmpId()+"' ";
-=======
 				+ e.getLname() + "', age= '" + e.getAge() +"','" + e.getUname() + "','" + e.getEmail() + "','" + e.getPassword() + "' where empId=  '"+ e.getEmpId()+"' ";
->>>>>>> login-work:src/main/java/io/spring/boot/employee/jdbc/impl/EmployeeImpl.java
 		return jdbcTemplate.update(query);
 	}
 	
