@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Add Post</title>
 </head>
 <body>
 
-<form action="/posts/addPost" method="POST">
+<form:form action="/posts/addPost" method="POST" modelAttribute="post">
 
-PostId:<input type="text" name="postId"/><br>
-postTitle:<input type="text" name ="postTitle"/><br>
-PostBody: <input type="text" name="postBody"/>
-<input type="submit" value="submit">
+PostId:<form:input path="postId"  type="text" disabled="disabled"/><br>
+postTitle:<form:input path ="postTitle" type="text"/><br>
+PostBody: <form:input path="postBody" type="text"/>
+<input type="submit" value="Submit"/>
 
-</form>
+</form:form>
 </body>
 </html>

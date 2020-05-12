@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import io.spring.boot.employee.jdbc.model.Post;
 public class PostController {
 	@Autowired
 	PostDAOImpl postDaoImpl;
+	@Autowired
+	HttpServletRequest request;
 	
 	@GetMapping("/addPost")
 	public ModelAndView createPost() {
@@ -31,7 +35,8 @@ public class PostController {
 	//RequestParam has an attribute defaultvalue="18"--for age 
 	//We can use RequestParam Map is the best way instead of usi
 	@PostMapping("/addPost")
-	public ModelAndView addPost(@RequestParam("postId") String postId, @RequestParam(required=false,name="postTitle") String postTitle, @RequestParam("postBody") String postBody){
+	public ModelAndView addPost(@RequestParam("postId") String postId, @RequestParam(required=false,name="postTitle") String postTitle, @RequestParam("postBody") String postBody) {
+		
 		Post post=new Post(postId, new Date(), postTitle, postBody);
 		System.out.println("Inside addpost(): " + post);
 		int status=postDaoImpl.savePost(post);
@@ -40,7 +45,7 @@ public class PostController {
 		if(status>0) {
 			System.out.println("successfully inserted");
 			mv.addObject("post", post);
-			mv.setViewName("successPost");
+			mv.setViewName("viewPost");
 		}else {
 			mv.setViewName("post");
 		}

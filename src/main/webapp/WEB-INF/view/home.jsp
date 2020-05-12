@@ -4,13 +4,18 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Home Page</title>
+<title>Simple Web Application</title>
 </head>
 <body>
 
-<a href="empForm">Register</a>  
-<a href="login">Login</a>
-<a href="logout">Login</a>
+<h2>Simple Web Application using JSP/Servlet/Spring MVC</h2>
 
+<ul>
+<li><a href="empForm">Register</a> </li>
+
+<li><a href="login">Login</a></li>
+
+<li><a href="postTitle"> PostTitle</a></li>
+</ul>
 </body>
 </html>

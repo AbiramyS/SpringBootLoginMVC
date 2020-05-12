@@ -42,7 +42,7 @@ public class PostDAOImpl implements PostDAO{
 		String sql = "select * from post where postId=?";
 		return jdbcTemaplate.queryForObject(sql, new PostRowMapper(), postId);
 	}
-
+	
 
 	@Override
 	public int deletePost(String postId) {
@@ -55,6 +55,8 @@ public class PostDAOImpl implements PostDAO{
 		String sql= "update post set  postTitle=?, postBody=? where postId =?";	
 		return jdbcTemaplate.update(sql);
 	}
+
+	
 }
 
 class PostRowMapper implements RowMapper<Post>{
